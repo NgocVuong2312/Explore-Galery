@@ -29,9 +29,6 @@ const usersFilePath = path.join(
 );
 const imageDir = path.join(process.cwd(), "/public/images");
 
-// Tạo thư mục images nếu chưa có
-if (!fs.existsSync(imageDir)) fs.mkdirSync(imageDir, { recursive: true });
-
 function readData(): ImageItem[] {
   try {
     const fileData = fs.readFileSync(filePath, "utf-8").trim();
