@@ -6,8 +6,12 @@ import { useState, useEffect } from "react";
 import { useUserByID } from "@/hooks/useUserByID";
 
 const Header = () => {
+  interface User {
+    userId: string;
+    email: string;
+  }
   const router = useRouter();
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   useEffect(() => {
     const user = localStorage.getItem("currentUser");

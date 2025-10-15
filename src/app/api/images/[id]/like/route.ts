@@ -12,7 +12,10 @@ interface ImageItem {
   author: string;
 }
 
-const filePath = path.join(process.cwd(), "src/app/api/images/data/mockImages.json");
+const filePath = path.join(
+  process.cwd(),
+  "src/app/api/images/data/mockImages.json"
+);
 
 // đọc dữ liệu JSON
 function readData(): ImageItem[] {
@@ -25,12 +28,18 @@ function writeData(data: ImageItem[]) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
-  const { id } = params;
+export async function PATCH(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
   const { userId } = await req.json();
 
   if (!userId) {
-    return NextResponse.json({ message: "userId is required" }, { status: 400 });
+    return NextResponse.json(
+      { message: "userId is required" },
+      { status: 400 }
+    );
   }
 
   const images = readData();

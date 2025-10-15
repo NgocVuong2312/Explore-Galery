@@ -24,7 +24,7 @@ export default function LoginPage() {
       message.success("Đăng nhập thành công!");
       localStorage.setItem("currentUser", JSON.stringify({ userId: data.userId, email: values.email }));
       router.push("/");
-    } catch (err: any) {
+    } catch (err) {
       message.error(err.message || "Đã có lỗi, thử lại sau");
     } finally {
       setLoading(false);

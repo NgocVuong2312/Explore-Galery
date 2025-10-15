@@ -8,9 +8,6 @@ const barlow = Barlow({
   variable: "--font-barlow",
   weight: ["400", "500", "600", "700"], // thêm các độ đậm bạn cần
 });
-export const metadata = {
-  title: "Authentication",
-};
 
 export default function AuthLayout({
   children,

@@ -11,7 +11,7 @@ const barlow = Barlow({
   weight: ["400", "500", "600", "700"], // thêm các độ đậm bạn cần
 });
 
-export const Galery = {
+export const metadata = {
   title: "Explore Galery",
   icons: {
     icon: '/favicon.ico',

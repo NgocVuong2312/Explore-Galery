@@ -7,7 +7,7 @@ export interface ImageItem {
   category: string;
   tags: string[];
   description?: string;
-  likeUser?: any[];
+  likeUser?: [];
   author?: { name: string };
 }
 
@@ -25,7 +25,7 @@ export function useImages(page?: number, all?: boolean) {
         if (!res.ok) throw new Error("Failed to fetch images");
         const json = await res.json();
         setData(json);
-      } catch (err: any) {
+      } catch (err) {
         setError(err.message || "Unknown error");
       } finally {
         setLoading(false);

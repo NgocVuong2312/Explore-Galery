@@ -103,7 +103,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "Image added", data: image });
   } catch (err) {
     return NextResponse.json(
-      { message: "Upload failed", error: (err as any).message },
+      { message: "Upload failed", error: (err).message },
       { status: 500 }
     );
   }

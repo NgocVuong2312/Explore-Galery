@@ -5,7 +5,11 @@ import { useRouter } from "next/navigation";
 import { postImage } from "@/api/postImage";
 
 export default function CreatePage() {
-  const [author, setAuthor] = useState<any>(null);
+  interface User {
+    userId: number;
+    email: string;
+  }
+  const [author, setAuthor] = useState<User>();
 
   useEffect(() => {
     const currentUser = localStorage.getItem("currentUser");
@@ -38,42 +42,48 @@ export default function CreatePage() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  const err = validate();
-  if (err) return setError(err);
+    e.preventDefault();
+    const err = validate();
+    if (err) return setError(err);
 
-  setError(null);
-  setLoading(true);
+    setError(null);
+    setLoading(true);
 
-  try {
-    await postImage({
-      title: form.title,
-      category: form.category,
-      tags: form.tags,
-      description: form.description,
-      author: author.userId,
-      img_file: form.img_file || undefined,
-      img_url: form.img_url || undefined,
-    });
+    try {
+      await postImage({
+        title: form.title,
+        category: form.category,
+        tags: Array.isArray(form.tags)
+          ? form.tags
+          : form.tags
+          ? [form.tags]
+          : [],
+        description: form.description,
+        author: Number(author?.userId),
+        img_file: form.img_file || undefined,
+        img_url: form.img_url || undefined,
+      });
 
-    router.push("/");
-  } catch (err: any) {
-    setError(err.message || "Unknown error occurred");
-  } finally {
-    setLoading(false);
-  }
-};
+      router.push("/");
+    } catch (err) {
+      setError(err.message || "Unknown error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-
-  const handleChange = (
+  const   handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    const { name, value, files } = e.target as any;
-    if (name === "img_file" && files) {
-      setForm((prev) => ({ ...prev, img_file: files[0] }));
+    const target = e.target;
+
+    if (target instanceof HTMLInputElement && target.type === "file") {
+      const file = target.files?.[0] || null;
+      setForm((prev) => ({ ...prev, img_file: file }));
     } else {
+      const { name, value } = target;
       setForm((prev) => ({ ...prev, [name]: value }));
     }
   };
@@ -113,13 +123,13 @@ export default function CreatePage() {
         </div>
 
         <div>
-          <label className="block mb-1 font-semibold">Or Upload Image</label>
+          <label className="block mb-1 font-semibold">Hoặc tải ảnh lên</label>
           <input
             type="file"
             name="img_file"
             accept="image/*"
             onChange={handleChange}
-            className="w-full"
+            className="w-full border px-3 py-2 rounded-md focus:ring-2 focus:ring-blue-400"
           />
         </div>
 
@@ -155,7 +165,7 @@ export default function CreatePage() {
 
         <div>
           <label className="block mb-1 font-semibold">
-            Tags (comma separated)
+            Tags (Dùng dấu phẩy chia tags)
           </label>
           <input
             type="text"

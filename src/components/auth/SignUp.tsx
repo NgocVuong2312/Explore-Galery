@@ -16,7 +16,7 @@ export default function SignupPage() {
       await signupUser(values); // gọi API riêng
       message.success("Đăng ký thành công! Chuyển sang trang login...");
       setTimeout(() => router.push("/auth/login"), 1000);
-    } catch (err: any) {
+    } catch (err) {
       message.error(err.message || "Đã có lỗi, thử lại sau");
     } finally {
       setLoading(false);

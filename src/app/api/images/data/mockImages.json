@@ -11,7 +11,8 @@
     "description": "",
     "likeUser": [
       1,
-      1760472971852
+      1760472971852,
+      1760505837168
     ],
     "author": {
       "id": 1,
@@ -85,15 +86,51 @@
       "name": "Alice",
       "email": "alice@email.com"
     },
-    "likeUser": []
+    "likeUser": [
+      1760505837168
+    ]
   },
   {
     "id": 1760510006940,
     "title": "eqwqe",
     "description": "",
     "tag": [],
-    "likeUser": [],
+    "likeUser": [
+      1760505837168
+    ],
     "img_url": "/images/1760510006939_469103515_122209660364031535_2544980468632825903_n.jpg",
+    "author": {
+      "id": 1760505837168,
+      "name": "winter",
+      "email": "winter@gmail.com"
+    }
+  },
+  {
+    "id": 1760516747290,
+    "title": "đágá",
+    "description": "",
+    "tag": [
+      ""
+    ],
+    "likeUser": [
+      1760505837168
+    ],
+    "img_url": "/images/1760516747287_iba4lotwcj6e1.jpeg",
+    "author": {
+      "id": 1760505837168,
+      "name": "winter",
+      "email": "winter@gmail.com"
+    }
+  },
+  {
+    "id": 1760516867627,
+    "title": "test",
+    "description": "",
+    "tag": [
+      ""
+    ],
+    "likeUser": [],
+    "img_url": "/images/1760516867626_malenia-head-elden-ring.webp",
     "author": {
       "id": 1760505837168,
       "name": "winter",
